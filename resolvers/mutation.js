@@ -1,9 +1,14 @@
 const Mutations = {
-    createCafe: (root, args, context) => {
-        return context.prisma.createCafe({
+    createCafe: async (root, args, context) => {
+        return await context.prisma.createCafe({
             name: args.name,
             city: args.city,
             address: args.address,
+        })
+    },
+    deleteCafe: async (root, args, context) => {
+        return await context.prisma.deleteCafe({
+            id: args.id
         })
     },
 };

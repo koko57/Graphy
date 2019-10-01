@@ -8,6 +8,7 @@ type Mutation {
         city: String!
         address: String!
     ): Cafe!
+    deleteCafe(id: ID!): Cafe!
 }
 
 type Cafe {
