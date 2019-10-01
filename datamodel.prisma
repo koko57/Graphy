@@ -1,7 +1,6 @@
-type Coffee {
-    name: String!
+type Cafe {
+    name: String! @unique
     id: ID! @id
-    roaster: String
-    origin: String
-    rating: Int
+    city: String!
+    address: String!
 }

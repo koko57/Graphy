@@ -16,7 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  coffee: (where?: CoffeeWhereInput) => Promise<boolean>;
+  cafe: (where?: CafeWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -38,47 +38,47 @@ export interface Prisma {
    * Queries
    */
 
-  coffee: (where: CoffeeWhereUniqueInput) => CoffeeNullablePromise;
-  coffees: (args?: {
-    where?: CoffeeWhereInput;
-    orderBy?: CoffeeOrderByInput;
+  cafe: (where: CafeWhereUniqueInput) => CafeNullablePromise;
+  cafes: (args?: {
+    where?: CafeWhereInput;
+    orderBy?: CafeOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<Coffee>;
-  coffeesConnection: (args?: {
-    where?: CoffeeWhereInput;
-    orderBy?: CoffeeOrderByInput;
+  }) => FragmentableArray<Cafe>;
+  cafesConnection: (args?: {
+    where?: CafeWhereInput;
+    orderBy?: CafeOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => CoffeeConnectionPromise;
+  }) => CafeConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
-  createCoffee: (data: CoffeeCreateInput) => CoffeePromise;
-  updateCoffee: (args: {
-    data: CoffeeUpdateInput;
-    where: CoffeeWhereUniqueInput;
-  }) => CoffeePromise;
-  updateManyCoffees: (args: {
-    data: CoffeeUpdateManyMutationInput;
-    where?: CoffeeWhereInput;
+  createCafe: (data: CafeCreateInput) => CafePromise;
+  updateCafe: (args: {
+    data: CafeUpdateInput;
+    where: CafeWhereUniqueInput;
+  }) => CafePromise;
+  updateManyCafes: (args: {
+    data: CafeUpdateManyMutationInput;
+    where?: CafeWhereInput;
   }) => BatchPayloadPromise;
-  upsertCoffee: (args: {
-    where: CoffeeWhereUniqueInput;
-    create: CoffeeCreateInput;
-    update: CoffeeUpdateInput;
-  }) => CoffeePromise;
-  deleteCoffee: (where: CoffeeWhereUniqueInput) => CoffeePromise;
-  deleteManyCoffees: (where?: CoffeeWhereInput) => BatchPayloadPromise;
+  upsertCafe: (args: {
+    where: CafeWhereUniqueInput;
+    create: CafeCreateInput;
+    update: CafeUpdateInput;
+  }) => CafePromise;
+  deleteCafe: (where: CafeWhereUniqueInput) => CafePromise;
+  deleteManyCafes: (where?: CafeWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -88,9 +88,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  coffee: (
-    where?: CoffeeSubscriptionWhereInput
-  ) => CoffeeSubscriptionPayloadSubscription;
+  cafe: (
+    where?: CafeSubscriptionWhereInput
+  ) => CafeSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -101,36 +101,38 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type CoffeeOrderByInput =
+export type CafeOrderByInput =
   | "name_ASC"
   | "name_DESC"
   | "id_ASC"
   | "id_DESC"
-  | "roaster_ASC"
-  | "roaster_DESC"
-  | "origin_ASC"
-  | "origin_DESC"
-  | "rating_ASC"
-  | "rating_DESC";
+  | "city_ASC"
+  | "city_DESC"
+  | "address_ASC"
+  | "address_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface CoffeeCreateInput {
+export interface CafeCreateInput {
   name: String;
   id?: Maybe<ID_Input>;
-  roaster?: Maybe<String>;
-  origin?: Maybe<String>;
-  rating?: Maybe<Int>;
+  city: String;
+  address: String;
 }
 
-export interface CoffeeUpdateInput {
+export interface CafeUpdateInput {
   name?: Maybe<String>;
-  roaster?: Maybe<String>;
-  origin?: Maybe<String>;
-  rating?: Maybe<Int>;
+  city?: Maybe<String>;
+  address?: Maybe<String>;
 }
 
-export interface CoffeeWhereInput {
+export interface CafeUpdateManyMutationInput {
+  name?: Maybe<String>;
+  city?: Maybe<String>;
+  address?: Maybe<String>;
+}
+
+export interface CafeWhereInput {
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -159,85 +161,71 @@ export interface CoffeeWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  roaster?: Maybe<String>;
-  roaster_not?: Maybe<String>;
-  roaster_in?: Maybe<String[] | String>;
-  roaster_not_in?: Maybe<String[] | String>;
-  roaster_lt?: Maybe<String>;
-  roaster_lte?: Maybe<String>;
-  roaster_gt?: Maybe<String>;
-  roaster_gte?: Maybe<String>;
-  roaster_contains?: Maybe<String>;
-  roaster_not_contains?: Maybe<String>;
-  roaster_starts_with?: Maybe<String>;
-  roaster_not_starts_with?: Maybe<String>;
-  roaster_ends_with?: Maybe<String>;
-  roaster_not_ends_with?: Maybe<String>;
-  origin?: Maybe<String>;
-  origin_not?: Maybe<String>;
-  origin_in?: Maybe<String[] | String>;
-  origin_not_in?: Maybe<String[] | String>;
-  origin_lt?: Maybe<String>;
-  origin_lte?: Maybe<String>;
-  origin_gt?: Maybe<String>;
-  origin_gte?: Maybe<String>;
-  origin_contains?: Maybe<String>;
-  origin_not_contains?: Maybe<String>;
-  origin_starts_with?: Maybe<String>;
-  origin_not_starts_with?: Maybe<String>;
-  origin_ends_with?: Maybe<String>;
-  origin_not_ends_with?: Maybe<String>;
-  rating?: Maybe<Int>;
-  rating_not?: Maybe<Int>;
-  rating_in?: Maybe<Int[] | Int>;
-  rating_not_in?: Maybe<Int[] | Int>;
-  rating_lt?: Maybe<Int>;
-  rating_lte?: Maybe<Int>;
-  rating_gt?: Maybe<Int>;
-  rating_gte?: Maybe<Int>;
-  AND?: Maybe<CoffeeWhereInput[] | CoffeeWhereInput>;
-  OR?: Maybe<CoffeeWhereInput[] | CoffeeWhereInput>;
-  NOT?: Maybe<CoffeeWhereInput[] | CoffeeWhereInput>;
+  city?: Maybe<String>;
+  city_not?: Maybe<String>;
+  city_in?: Maybe<String[] | String>;
+  city_not_in?: Maybe<String[] | String>;
+  city_lt?: Maybe<String>;
+  city_lte?: Maybe<String>;
+  city_gt?: Maybe<String>;
+  city_gte?: Maybe<String>;
+  city_contains?: Maybe<String>;
+  city_not_contains?: Maybe<String>;
+  city_starts_with?: Maybe<String>;
+  city_not_starts_with?: Maybe<String>;
+  city_ends_with?: Maybe<String>;
+  city_not_ends_with?: Maybe<String>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
+  AND?: Maybe<CafeWhereInput[] | CafeWhereInput>;
+  OR?: Maybe<CafeWhereInput[] | CafeWhereInput>;
+  NOT?: Maybe<CafeWhereInput[] | CafeWhereInput>;
 }
 
-export interface CoffeeUpdateManyMutationInput {
-  name?: Maybe<String>;
-  roaster?: Maybe<String>;
-  origin?: Maybe<String>;
-  rating?: Maybe<Int>;
-}
-
-export interface CoffeeSubscriptionWhereInput {
+export interface CafeSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CoffeeWhereInput>;
-  AND?: Maybe<CoffeeSubscriptionWhereInput[] | CoffeeSubscriptionWhereInput>;
-  OR?: Maybe<CoffeeSubscriptionWhereInput[] | CoffeeSubscriptionWhereInput>;
-  NOT?: Maybe<CoffeeSubscriptionWhereInput[] | CoffeeSubscriptionWhereInput>;
+  node?: Maybe<CafeWhereInput>;
+  AND?: Maybe<CafeSubscriptionWhereInput[] | CafeSubscriptionWhereInput>;
+  OR?: Maybe<CafeSubscriptionWhereInput[] | CafeSubscriptionWhereInput>;
+  NOT?: Maybe<CafeSubscriptionWhereInput[] | CafeSubscriptionWhereInput>;
 }
 
-export type CoffeeWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
+export type CafeWhereUniqueInput = AtLeastOne<{
+  name: Maybe<String>;
+  id?: Maybe<ID_Input>;
 }>;
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface AggregateCoffee {
+export interface AggregateCafe {
   count: Int;
 }
 
-export interface AggregateCoffeePromise
-  extends Promise<AggregateCoffee>,
+export interface AggregateCafePromise
+  extends Promise<AggregateCafe>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateCoffeeSubscription
-  extends Promise<AsyncIterator<AggregateCoffee>>,
+export interface AggregateCafeSubscription
+  extends Promise<AsyncIterator<AggregateCafe>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -258,131 +246,124 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface CoffeePreviousValues {
+export interface CafePreviousValues {
   name: String;
   id: ID_Output;
-  roaster?: String;
-  origin?: String;
-  rating?: Int;
+  city: String;
+  address: String;
 }
 
-export interface CoffeePreviousValuesPromise
-  extends Promise<CoffeePreviousValues>,
+export interface CafePreviousValuesPromise
+  extends Promise<CafePreviousValues>,
     Fragmentable {
   name: () => Promise<String>;
   id: () => Promise<ID_Output>;
-  roaster: () => Promise<String>;
-  origin: () => Promise<String>;
-  rating: () => Promise<Int>;
+  city: () => Promise<String>;
+  address: () => Promise<String>;
 }
 
-export interface CoffeePreviousValuesSubscription
-  extends Promise<AsyncIterator<CoffeePreviousValues>>,
+export interface CafePreviousValuesSubscription
+  extends Promise<AsyncIterator<CafePreviousValues>>,
     Fragmentable {
   name: () => Promise<AsyncIterator<String>>;
   id: () => Promise<AsyncIterator<ID_Output>>;
-  roaster: () => Promise<AsyncIterator<String>>;
-  origin: () => Promise<AsyncIterator<String>>;
-  rating: () => Promise<AsyncIterator<Int>>;
+  city: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
 }
 
-export interface CoffeeEdge {
-  node: Coffee;
+export interface CafeEdge {
+  node: Cafe;
   cursor: String;
 }
 
-export interface CoffeeEdgePromise extends Promise<CoffeeEdge>, Fragmentable {
-  node: <T = CoffeePromise>() => T;
+export interface CafeEdgePromise extends Promise<CafeEdge>, Fragmentable {
+  node: <T = CafePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface CoffeeEdgeSubscription
-  extends Promise<AsyncIterator<CoffeeEdge>>,
+export interface CafeEdgeSubscription
+  extends Promise<AsyncIterator<CafeEdge>>,
     Fragmentable {
-  node: <T = CoffeeSubscription>() => T;
+  node: <T = CafeSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface CoffeeSubscriptionPayload {
+export interface CafeSubscriptionPayload {
   mutation: MutationType;
-  node: Coffee;
+  node: Cafe;
   updatedFields: String[];
-  previousValues: CoffeePreviousValues;
+  previousValues: CafePreviousValues;
 }
 
-export interface CoffeeSubscriptionPayloadPromise
-  extends Promise<CoffeeSubscriptionPayload>,
+export interface CafeSubscriptionPayloadPromise
+  extends Promise<CafeSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = CoffeePromise>() => T;
+  node: <T = CafePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = CoffeePreviousValuesPromise>() => T;
+  previousValues: <T = CafePreviousValuesPromise>() => T;
 }
 
-export interface CoffeeSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CoffeeSubscriptionPayload>>,
+export interface CafeSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CafeSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CoffeeSubscription>() => T;
+  node: <T = CafeSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CoffeePreviousValuesSubscription>() => T;
+  previousValues: <T = CafePreviousValuesSubscription>() => T;
 }
 
-export interface Coffee {
+export interface Cafe {
   name: String;
   id: ID_Output;
-  roaster?: String;
-  origin?: String;
-  rating?: Int;
+  city: String;
+  address: String;
 }
 
-export interface CoffeePromise extends Promise<Coffee>, Fragmentable {
+export interface CafePromise extends Promise<Cafe>, Fragmentable {
   name: () => Promise<String>;
   id: () => Promise<ID_Output>;
-  roaster: () => Promise<String>;
-  origin: () => Promise<String>;
-  rating: () => Promise<Int>;
+  city: () => Promise<String>;
+  address: () => Promise<String>;
 }
 
-export interface CoffeeSubscription
-  extends Promise<AsyncIterator<Coffee>>,
+export interface CafeSubscription
+  extends Promise<AsyncIterator<Cafe>>,
     Fragmentable {
   name: () => Promise<AsyncIterator<String>>;
   id: () => Promise<AsyncIterator<ID_Output>>;
-  roaster: () => Promise<AsyncIterator<String>>;
-  origin: () => Promise<AsyncIterator<String>>;
-  rating: () => Promise<AsyncIterator<Int>>;
+  city: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
 }
 
-export interface CoffeeNullablePromise
-  extends Promise<Coffee | null>,
+export interface CafeNullablePromise
+  extends Promise<Cafe | null>,
     Fragmentable {
   name: () => Promise<String>;
   id: () => Promise<ID_Output>;
-  roaster: () => Promise<String>;
-  origin: () => Promise<String>;
-  rating: () => Promise<Int>;
+  city: () => Promise<String>;
+  address: () => Promise<String>;
 }
 
-export interface CoffeeConnection {
+export interface CafeConnection {
   pageInfo: PageInfo;
-  edges: CoffeeEdge[];
+  edges: CafeEdge[];
 }
 
-export interface CoffeeConnectionPromise
-  extends Promise<CoffeeConnection>,
+export interface CafeConnectionPromise
+  extends Promise<CafeConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CoffeeEdge>>() => T;
-  aggregate: <T = AggregateCoffeePromise>() => T;
+  edges: <T = FragmentableArray<CafeEdge>>() => T;
+  aggregate: <T = AggregateCafePromise>() => T;
 }
 
-export interface CoffeeConnectionSubscription
-  extends Promise<AsyncIterator<CoffeeConnection>>,
+export interface CafeConnectionSubscription
+  extends Promise<AsyncIterator<CafeConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CoffeeEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCoffeeSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CafeEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCafeSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -409,17 +390,17 @@ export interface PageInfoSubscription
 }
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-export type Long = string;
-
-/*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
+
+export type Long = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
@@ -437,7 +418,7 @@ export type Boolean = boolean;
 
 export const models: Model[] = [
   {
-    name: "Coffee",
+    name: "Cafe",
     embedded: false
   }
 ];

@@ -1,20 +1,18 @@
 type Query {
-    coffees: [Coffee!]
+    cafes: [Cafe!]
 }
 
 type Mutation {
-    createCoffee(
+    createCafe(
         name: String!
-        roaster: String,
-        origin: String,
-        rating: Int,
-    ): Coffee!
+        city: String!
+        address: String!
+    ): Cafe!
 }
 
-type Coffee {
+type Cafe {
     name: String!
     id: ID!
-    roaster: String
-    origin: String
-    rating: Int
+    city: String!
+    address: String!
 }

@@ -5,7 +5,7 @@ const typeDefs = require("./prisma-schema").typeDefs;
 
 const models = [
   {
-    name: "Coffee",
+    name: "Cafe",
     embedded: false
   }
 ];

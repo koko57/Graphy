@@ -3,7 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateCoffee {
+/* GraphQL */ `type AggregateCafe {
   count: Int!
 }
 
@@ -11,87 +11,80 @@ type BatchPayload {
   count: Long!
 }
 
-type Coffee {
+type Cafe {
   name: String!
   id: ID!
-  roaster: String
-  origin: String
-  rating: Int
+  city: String!
+  address: String!
 }
 
-type CoffeeConnection {
+type CafeConnection {
   pageInfo: PageInfo!
-  edges: [CoffeeEdge]!
-  aggregate: AggregateCoffee!
+  edges: [CafeEdge]!
+  aggregate: AggregateCafe!
 }
 
-input CoffeeCreateInput {
+input CafeCreateInput {
   name: String!
   id: ID
-  roaster: String
-  origin: String
-  rating: Int
+  city: String!
+  address: String!
 }
 
-type CoffeeEdge {
-  node: Coffee!
+type CafeEdge {
+  node: Cafe!
   cursor: String!
 }
 
-enum CoffeeOrderByInput {
+enum CafeOrderByInput {
   name_ASC
   name_DESC
   id_ASC
   id_DESC
-  roaster_ASC
-  roaster_DESC
-  origin_ASC
-  origin_DESC
-  rating_ASC
-  rating_DESC
+  city_ASC
+  city_DESC
+  address_ASC
+  address_DESC
 }
 
-type CoffeePreviousValues {
+type CafePreviousValues {
   name: String!
   id: ID!
-  roaster: String
-  origin: String
-  rating: Int
+  city: String!
+  address: String!
 }
 
-type CoffeeSubscriptionPayload {
+type CafeSubscriptionPayload {
   mutation: MutationType!
-  node: Coffee
+  node: Cafe
   updatedFields: [String!]
-  previousValues: CoffeePreviousValues
+  previousValues: CafePreviousValues
 }
 
-input CoffeeSubscriptionWhereInput {
+input CafeSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: CoffeeWhereInput
-  AND: [CoffeeSubscriptionWhereInput!]
-  OR: [CoffeeSubscriptionWhereInput!]
-  NOT: [CoffeeSubscriptionWhereInput!]
+  node: CafeWhereInput
+  AND: [CafeSubscriptionWhereInput!]
+  OR: [CafeSubscriptionWhereInput!]
+  NOT: [CafeSubscriptionWhereInput!]
 }
 
-input CoffeeUpdateInput {
+input CafeUpdateInput {
   name: String
-  roaster: String
-  origin: String
-  rating: Int
+  city: String
+  address: String
 }
 
-input CoffeeUpdateManyMutationInput {
+input CafeUpdateManyMutationInput {
   name: String
-  roaster: String
-  origin: String
-  rating: Int
+  city: String
+  address: String
 }
 
-input CoffeeWhereInput {
+input CafeWhereInput {
   name: String
   name_not: String
   name_in: [String!]
@@ -120,60 +113,53 @@ input CoffeeWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  roaster: String
-  roaster_not: String
-  roaster_in: [String!]
-  roaster_not_in: [String!]
-  roaster_lt: String
-  roaster_lte: String
-  roaster_gt: String
-  roaster_gte: String
-  roaster_contains: String
-  roaster_not_contains: String
-  roaster_starts_with: String
-  roaster_not_starts_with: String
-  roaster_ends_with: String
-  roaster_not_ends_with: String
-  origin: String
-  origin_not: String
-  origin_in: [String!]
-  origin_not_in: [String!]
-  origin_lt: String
-  origin_lte: String
-  origin_gt: String
-  origin_gte: String
-  origin_contains: String
-  origin_not_contains: String
-  origin_starts_with: String
-  origin_not_starts_with: String
-  origin_ends_with: String
-  origin_not_ends_with: String
-  rating: Int
-  rating_not: Int
-  rating_in: [Int!]
-  rating_not_in: [Int!]
-  rating_lt: Int
-  rating_lte: Int
-  rating_gt: Int
-  rating_gte: Int
-  AND: [CoffeeWhereInput!]
-  OR: [CoffeeWhereInput!]
-  NOT: [CoffeeWhereInput!]
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  AND: [CafeWhereInput!]
+  OR: [CafeWhereInput!]
+  NOT: [CafeWhereInput!]
 }
 
-input CoffeeWhereUniqueInput {
+input CafeWhereUniqueInput {
+  name: String
   id: ID
 }
 
 scalar Long
 
 type Mutation {
-  createCoffee(data: CoffeeCreateInput!): Coffee!
-  updateCoffee(data: CoffeeUpdateInput!, where: CoffeeWhereUniqueInput!): Coffee
-  updateManyCoffees(data: CoffeeUpdateManyMutationInput!, where: CoffeeWhereInput): BatchPayload!
-  upsertCoffee(where: CoffeeWhereUniqueInput!, create: CoffeeCreateInput!, update: CoffeeUpdateInput!): Coffee!
-  deleteCoffee(where: CoffeeWhereUniqueInput!): Coffee
-  deleteManyCoffees(where: CoffeeWhereInput): BatchPayload!
+  createCafe(data: CafeCreateInput!): Cafe!
+  updateCafe(data: CafeUpdateInput!, where: CafeWhereUniqueInput!): Cafe
+  updateManyCafes(data: CafeUpdateManyMutationInput!, where: CafeWhereInput): BatchPayload!
+  upsertCafe(where: CafeWhereUniqueInput!, create: CafeCreateInput!, update: CafeUpdateInput!): Cafe!
+  deleteCafe(where: CafeWhereUniqueInput!): Cafe
+  deleteManyCafes(where: CafeWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -194,14 +180,15 @@ type PageInfo {
 }
 
 type Query {
-  coffee(where: CoffeeWhereUniqueInput!): Coffee
-  coffees(where: CoffeeWhereInput, orderBy: CoffeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Coffee]!
-  coffeesConnection(where: CoffeeWhereInput, orderBy: CoffeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CoffeeConnection!
+  cafe(where: CafeWhereUniqueInput!): Cafe
+  cafes(where: CafeWhereInput, orderBy: CafeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cafe]!
+  cafesConnection(where: CafeWhereInput, orderBy: CafeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CafeConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
-  coffee(where: CoffeeSubscriptionWhereInput): CoffeeSubscriptionPayload
+  cafe(where: CafeSubscriptionWhereInput): CafeSubscriptionPayload
 }
 `
-      };
+      }
+    
