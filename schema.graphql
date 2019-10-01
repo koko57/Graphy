@@ -1,0 +1,20 @@
+type Query {
+    coffees: [Coffee!]
+}
+
+type Mutation {
+    createCoffee(
+        name: String!
+        roaster: String,
+        origin: String,
+        rating: Int,
+    ): Coffee!
+}
+
+type Coffee {
+    name: String!
+    id: ID!
+    roaster: String
+    origin: String
+    rating: Int
+}

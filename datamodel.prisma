@@ -1,0 +1,7 @@
+type Coffee {
+    name: String!
+    id: ID! @id
+    roaster: String
+    origin: String
+    rating: Int
+}
