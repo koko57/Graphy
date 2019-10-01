@@ -1,0 +1,19 @@
+type Query {
+    cafes: [Cafe!]
+}
+
+type Mutation {
+    createCafe(
+        name: String!
+        city: String!
+        address: String!
+    ): Cafe!
+    deleteCafe(id: ID!): Cafe!
+}
+
+type Cafe {
+    name: String!
+    id: ID!
+    city: String!
+    address: String!
+}

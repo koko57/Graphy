@@ -1,0 +1,6 @@
+type Cafe {
+    name: String! @unique
+    id: ID! @id
+    city: String!
+    address: String!
+}
