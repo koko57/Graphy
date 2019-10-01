@@ -1,6 +1,6 @@
 const Query = {
-    cafes: (root, args, context, info) => {
-        return context.prisma.cafes()
+    cafes: async (root, args, context, info) => {
+        return await context.prisma.cafes()
     },
 };
 
