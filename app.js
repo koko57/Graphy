@@ -10,7 +10,6 @@ const resolvers = {
     Mutation
 };
 
-console.log(resolvers);
 const server = new GraphQLServer({
     typeDefs: './schema.graphql',
     resolvers,
